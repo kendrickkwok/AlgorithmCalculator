@@ -22,13 +22,14 @@ public class Calculator extends javax.swing.JFrame {
     Stack<Double> stack = new Stack<Double>();
     /* Instantiate singleton variable */
     Arithmetic ac = Arithmetic.getCalculation();
-    boolean nextIsNum = true;
+    double firstNum = 0;
     double result = 0;
     
     public Calculator() {
         initComponents();
     }
 
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,6 +58,7 @@ public class Calculator extends javax.swing.JFrame {
         PosNegButton = new javax.swing.JButton();
         equalsButton = new javax.swing.JButton();
         resultField2 = new javax.swing.JTextField();
+        jButton0 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -193,6 +195,13 @@ public class Calculator extends javax.swing.JFrame {
             }
         });
 
+        jButton0.setText("0");
+        jButton0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton0ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,7 +220,7 @@ public class Calculator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(minusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(equalsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,7 +236,8 @@ public class Calculator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(resultField, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PosNegButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,7 +261,6 @@ public class Calculator extends javax.swing.JFrame {
                 .addComponent(resultField2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(resultField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -283,7 +292,9 @@ public class Calculator extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
 
@@ -295,15 +306,8 @@ public class Calculator extends javax.swing.JFrame {
                 String someNum = jButton3.getText(); 
                 String resultStringField2 = resultField2.getText() + someNum; 
                 resultField2.setText(resultStringField2); 
-                resultField.setText(someNum); 
-                stack.push(Double.parseDouble(someNum));
-                    if(stack.size() == 3) {
-                        result = ac.getCalculation(stack.pop(),
-                                (stack.pop().intValue()),
-                                 stack.pop());
-                        stack.push(result);
-                        System.out.println(result);
-                    }
+                resultField.setText(resultField.getText() + someNum); 
+                firstNum = (Double.parseDouble(someNum));
                    // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -311,27 +315,20 @@ public class Calculator extends javax.swing.JFrame {
         
         if(resultField.getText() != "")
         {
-            double temp = stack.pop()*-1;
+            double temp = Double.parseDouble(resultField.getText());
+            temp = temp * -1;
             resultField.setText(Double.toString(temp));
-            stack.push(temp);
         }
     }//GEN-LAST:event_PosNegButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             
                 String someNum = jButton1.getText(); 
+                //if(NumberUtils.isNumber(someNum));
                 String resultStringField2 = resultField2.getText() + someNum; 
                 resultField2.setText(resultStringField2); 
-                resultField.setText(someNum); 
-                stack.push(Double.parseDouble(someNum));
-                    if(stack.size() == 3) {
-                        result = ac.getCalculation(stack.pop(),
-                                (stack.pop().intValue()),
-                                 stack.pop());
-                        stack.push(result);
-                        System.out.println(result);
-                    }
-
+                resultField.setText(resultField.getText() + someNum);
+                firstNum = (Double.parseDouble(someNum));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -339,15 +336,8 @@ public class Calculator extends javax.swing.JFrame {
                 String someNum = jButton2.getText(); 
                 String resultStringField2 = resultField2.getText() + someNum; 
                 resultField2.setText(resultStringField2); 
-                resultField.setText(someNum); 
-                stack.push(Double.parseDouble(someNum));
-                    if(stack.size() == 3) {
-                        result = ac.getCalculation(stack.pop(),
-                                (stack.pop().intValue()),
-                                 stack.pop());
-                        stack.push(result);
-                        System.out.println(result);
-                    }
+                resultField.setText(resultField.getText() + someNum); 
+                firstNum = (Double.parseDouble(someNum));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -355,15 +345,8 @@ public class Calculator extends javax.swing.JFrame {
                 String someNum = jButton4.getText(); 
                 String resultStringField2 = resultField2.getText() + someNum; 
                 resultField2.setText(resultStringField2); 
-                resultField.setText(someNum); 
-                stack.push(Double.parseDouble(someNum));
-                    if(stack.size() == 3) {
-                        result = ac.getCalculation(stack.pop(),
-                                (stack.pop().intValue()),
-                                 stack.pop());
-                        stack.push(result);
-                        System.out.println(result);
-                    }
+                resultField.setText(resultField.getText() + someNum); 
+                firstNum = (Double.parseDouble(someNum));
                 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -372,123 +355,147 @@ public class Calculator extends javax.swing.JFrame {
                 String someNum = jButton5.getText(); 
                 String resultStringField2 = resultField2.getText() + someNum; 
                 resultField2.setText(resultStringField2); 
-                resultField.setText(someNum); 
-                stack.push(Double.parseDouble(someNum));
-                    if(stack.size() == 3) {
-                        result = ac.getCalculation(stack.pop(),
-                                (stack.pop().intValue()),
-                                 stack.pop());
-                        stack.push(result);
-                        System.out.println(result);
-                    }
+                resultField.setText(resultField.getText() + someNum); 
+                firstNum = (Double.parseDouble(someNum));
                 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
                 String someNum = jButton6.getText(); 
                 String resultStringField2 = resultField2.getText() + someNum; 
                 resultField2.setText(resultStringField2); 
-                resultField.setText(someNum); 
-                stack.push(Double.parseDouble(someNum));
-                    if(stack.size() == 3) {
-                        result = ac.getCalculation(stack.pop(),
-                                (stack.pop().intValue()),
-                                 stack.pop());
-                        stack.push(result);
-                        System.out.println(result);
-                    }
-                
+                resultField.setText(resultField.getText() + someNum); 
+                firstNum = (Double.parseDouble(someNum));
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-
                 String someNum = jButton7.getText(); 
                 String resultStringField2 = resultField2.getText() + someNum; 
                 resultField2.setText(resultStringField2); 
-                resultField.setText(someNum); 
-                stack.push(Double.parseDouble(someNum));
-                    if(stack.size() == 3) {
-                        result = ac.getCalculation(stack.pop(),
-                                (stack.pop().intValue()),
-                                 stack.pop());
-                        stack.push(result);
-                        System.out.println(result);
-                    }
-                
+                resultField.setText(resultField.getText() + someNum); 
+                firstNum = (Double.parseDouble(someNum));
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
                 String someNum = jButton8.getText(); 
                 String resultStringField2 = resultField2.getText() + someNum; 
                 resultField2.setText(resultStringField2); 
-                resultField.setText(someNum); 
-                stack.push(Double.parseDouble(someNum));
-                    if(stack.size() == 3) {
-                        result = ac.getCalculation(stack.pop(),
-                                (stack.pop().intValue()),
-                                 stack.pop());
-                        stack.push(result);
-                        System.out.println(result);
-                    }
+                resultField.setText(resultField.getText() + someNum); 
+                firstNum = (Double.parseDouble(someNum));
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-
                 String someNum = jButton9.getText(); 
                 String resultStringField2 = resultField2.getText() + someNum; 
                 resultField2.setText(resultStringField2); 
-                resultField.setText(someNum); 
-                stack.push(Double.parseDouble(someNum));
-                    if(stack.size() == 3) {
-                        result = ac.getCalculation(stack.pop(),
-                                (stack.pop().intValue()),
-                                 stack.pop());
-                        stack.push(result);
-                        System.out.println(result);
-                    }
+                resultField.setText(resultField.getText() + someNum); 
+                firstNum = (Double.parseDouble(someNum));
                 
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void plusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusButtonActionPerformed
-       
+            String temp  = resultField.getText();
             resultField2.setText(resultField2.getText() + "+");
             resultField.setText("+");
-            stack.push(1.0);       
+            stack.push(Double.parseDouble(temp));
+            
+            while(stack.size() != 1)
+            {
+                result = ac.getCalculation(stack.pop(),
+                    (stack.pop().intValue()),
+                    stack.pop());
+
+                stack.push(result);
+                resultField2.setText(Double.toString(result));
+            }
+       
+            stack.push(1.0);     
+            resultField.setText("");
             // TODO add your handling code here:
     }//GEN-LAST:event_plusButtonActionPerformed
 
     private void multiplyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplyButtonActionPerformed
-
+  String temp  = resultField.getText();
             resultField2.setText(resultField2.getText() + "*");
             resultField.setText("*");
-            stack.push(3.0);       
+            stack.push(Double.parseDouble(temp));
+            
+            while(stack.size() != 1)
+            {
+                result = ac.getCalculation(stack.pop(),
+                    (stack.pop().intValue()),
+                    stack.pop());
+
+                stack.push(result);
+                resultField2.setText(Double.toString(result));
+            }
+       
+            stack.push(3.0);     
+            resultField.setText("");
+            // TODO add your handling code here:
     }//GEN-LAST:event_multiplyButtonActionPerformed
 
     private void divideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideButtonActionPerformed
-
+  String temp  = resultField.getText();
             resultField2.setText(resultField2.getText() + "/");
             resultField.setText("/");
-            stack.push(4.0);           // TODO add your handling code here:
+            stack.push(Double.parseDouble(temp));
+            
+            while(stack.size() != 1)
+            {
+                result = ac.getCalculation(stack.pop(),
+                    (stack.pop().intValue()),
+                    stack.pop());
+
+                stack.push(result);
+                resultField2.setText(Double.toString(result));
+            }
+       
+            stack.push(4.0);     
+            resultField.setText("");
+            // TODO add your handling code here:
     }//GEN-LAST:event_divideButtonActionPerformed
 
     private void minusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusButtonActionPerformed
 
+  String temp  = resultField.getText();
             resultField2.setText(resultField2.getText() + "-");
             resultField.setText("-");
-            stack.push(2.0);          // TODO add your handling code here:
+            stack.push(Double.parseDouble(temp));
+            
+            while(stack.size() != 1)
+            {
+                result = ac.getCalculation(stack.pop(),
+                    (stack.pop().intValue()),
+                    stack.pop());
+
+                stack.push(result);
+                resultField2.setText(Double.toString(result));
+            }
+       
+            stack.push(2.0);     
+            resultField.setText("");
+            // TODO add your handling code here:
     }//GEN-LAST:event_minusButtonActionPerformed
 
     private void equalsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalsButtonActionPerformed
-        //Calculate the value, and then push it to the stack
-        /*
-        double result = ac.getCalculation(stack.pop(), 
-                    (stack.pop().intValue()),
-                    Double.parseDouble(resultField.getText()));
-        stack.push(result);
-        */
-        resultField.setText(Double.toString(result));
+        
+        String temp  = resultField.getText();
+        stack.push(Double.parseDouble(temp));
+            
+        
+            while(stack.size() != 1)
+            {
+            result = ac.getCalculation(stack.pop(),
+                (stack.pop().intValue()),
+                stack.pop());
+
+            stack.push(result);
+            }
+        String temp1 = Double.toString(stack.pop());
+        resultField.setText(temp1);
+        resultField2.setText(temp1);
+        
     }//GEN-LAST:event_equalsButtonActionPerformed
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
@@ -501,10 +508,24 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_resetButtonActionPerformed
 
     private void powButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_powButtonActionPerformed
-
+  String temp  = resultField.getText();
             resultField2.setText(resultField2.getText() + "^");
             resultField.setText("^");
-            stack.push(5.0);       
+            stack.push(Double.parseDouble(temp));
+            
+            while(stack.size() != 1)
+            {
+                result = ac.getCalculation(stack.pop(),
+                    (stack.pop().intValue()),
+                    stack.pop());
+
+                stack.push(result);
+                resultField2.setText(Double.toString(result));
+            }
+       
+            stack.push(5.0);     
+            resultField.setText("");
+            // TODO add your handling code here:
     }//GEN-LAST:event_powButtonActionPerformed
 
     private void resultFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultFieldActionPerformed
@@ -515,6 +536,15 @@ public class Calculator extends javax.swing.JFrame {
         
     }//GEN-LAST:event_resultField2ActionPerformed
 
+    private void jButton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton0ActionPerformed
+                   String someNum = jButton0.getText(); 
+                //if(NumberUtils.isNumber(someNum));
+                String resultStringField2 = resultField2.getText() + someNum; 
+                resultField2.setText(resultStringField2); 
+                resultField.setText(resultField.getText() + someNum);
+                firstNum = (Double.parseDouble(someNum));
+    }//GEN-LAST:event_jButton0ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -524,6 +554,7 @@ public class Calculator extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -554,6 +585,7 @@ public class Calculator extends javax.swing.JFrame {
     private javax.swing.JButton PosNegButton;
     private javax.swing.JButton divideButton;
     private javax.swing.JButton equalsButton;
+    private javax.swing.JButton jButton0;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

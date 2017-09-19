@@ -40,7 +40,7 @@
                           </Group>
                           <Component id="equalsButton" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jButton1" min="-2" pref="89" max="-2" attributes="0"/>
@@ -60,6 +60,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButton9" min="-2" pref="87" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jButton0" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="resultField" alignment="1" max="32767" attributes="0"/>
@@ -90,7 +91,6 @@
               <Component id="resultField2" min="-2" pref="23" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="resultField" min="-2" pref="34" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -130,6 +130,8 @@
                                   <Component id="jButton9" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
                                   <Component id="jButton7" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton0" min="-2" pref="80" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -290,6 +292,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resultField2ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton0">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton0ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
